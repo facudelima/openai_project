@@ -1,28 +1,28 @@
 # Build and deploy your own ChatGPT AI app to help you code!
-# Use npm install cors dotenv nodemon openai in the folder "server" and npm install in the folder "client" using node version 16 or higher.
-# Use npm run server to run server.js and npm run dev to run script.js, you need run both at the same time if you will use this local.
-# If you are going to use this, you need to change the API key in the .env for the API key provided by OpenAI.
+Use npm install cors dotenv nodemon openai in the "server" folder and npm install in the "client" folder using node version 16 or higher.
+Use npm run server to run server.js and npm run dev to run script.js, you need to run both at the same time if you are going to use this locally.
+If you are going to use this, you need to change the API key in the .env file for the API key provided by OpenAI.
 # Thank you! <3
 
-# =====EXPLICACION DEL CODIGO CHATBOT.JS=============
+# =============EXPLANATION OF THE CHATBOT.JS CODE=============
 
-# La primera línea importa dos archivos SVG (Scalable Vector Graphics) que se utilizan como iconos del usuario y del bot.
-# Luego, el código selecciona el elemento de formulario y el contenedor de chat en el DOM (Document Object Model) utilizando la función querySelector.
-# La función loader muestra una animación de "cargando" en el elemento especificado. La animación consiste en añadir un punto cada 300   milisegundos hasta que se han añadido cuatro puntos, y luego volver a empezar.
-# La función typeText muestra el texto especificado en el elemento especificado de manera efecto tipográfico, agregando un carácter cada 20 milisegundos.
-# La función generateUniqueId genera un ID único para cada elemento de mensaje del bot. Esto se utiliza para aplicar el efecto tipográfico a la respuesta del bot de manera independiente de cualquier otro mensaje.
-# La función chatStripe genera un elemento de chat para el usuario o el bot con el mensaje especificado. Utiliza los iconos del usuario y del bot importados al principio del archivo.
-# La función handleSubmit es el controlador del evento submit del formulario. En primer lugar, se crea una instancia de FormData a partir del formulario y se envía al servidor a través de una solicitud POST. Luego, se muestra un elemento de chat para el mensaje del usuario y un elemento de chat en blanco para la respuesta del bot. Después de eso, se muestra una animación de "cargando" en el elemento de chat del bot y se envía una solicitud POST al servidor para obtener la respuesta del bot. Cuando se recibe la respuesta, se elimina la animación de "cargando" y se muestra el texto de la respuesta del bot con el efecto tipográfico.
-# Finalmente, el código agrega dos controladores de eventos al formulario: uno para el evento submit y otro para el evento keyup. El controlador #del evento submit llama a la función handleSubmit, mientras que el controlador del evento keyup llama a la función handleSubmit solo si la #tecla presionada es "Enter".
+~ The first line imports two Scalable Vector Graphics (SVG) files that are used as icons for the user and the bot.
+~ Then, the code selects the form element and the chat container in the Document Object Model (DOM) using the querySelector function.
+~ The loader function displays a "loading" animation on the specified element. The animation consists of adding a dot every 300 milliseconds until four dots have been added, and then starting over.
+~ The typeText function displays the specified text in the specified element with a typographic effect, adding one character every 20 milliseconds.
+~ The generateUniqueId function generates a unique ID for each bot message element. This is used to apply the typographic effect to the bot's response independently of any other message.
+~ The chatStripe function generates a chat element for the user or the bot with the specified message. It uses the user and bot icons imported at the beginning of the file.
+~ The handleSubmit function is the event handler for the form's submit event. First, a FormData instance is created from the form and sent to the server via a POST request. Then, a chat element is displayed for the user's message and a blank chat element for the bot's response. After that, a "loading" animation is displayed on the bot's chat element and a POST request is sent to the server to get the bot's response. When the response is received, the "loading" animation is removed and the text of the bot's response is displayed with the typographic effect.
+~ Finally, the code adds two event handlers to the form: one for the submit event and one for the keyup event. The submit event handler calls the handleSubmit function, while the keyup event handler calls the handleSubmit function only if the pressed key is "Enter".
 
-# =====EXPLICACION DEL CODIGO SERVER.JS=============
-# La primera línea importa la librería de express, que se utiliza para crear el servidor.
-# La segunda línea importa todas las exportaciones de la librería dotenv, que se utiliza para cargar variables de entorno desde un archivo .env.
-# La tercera línea importa la librería cors, que se utiliza para habilitar la solicitud entre orígenes (CORS).
-# La cuarta línea importa las clases Configuration y OpenAIApi de la librería openai.
-# Luego, se cargan las variables de entorno del archivo .env con dotenv.config().
-# A continuación, se crea una instancia de Configuration con la clave de API de OpenAI, que se obtiene de una variable de entorno. Después, se crea una instancia de OpenAIApi con la configuración anterior.
-# A continuación, se crea una aplicación de express y se configura para utilizar cors y para aceptar solicitudes JSON. 
-# Se define un controlador de ruta para la ruta raíz que envía un mensaje de bienvenida.
-# Se define otro controlador de ruta para la ruta raíz que recibe un mensaje del usuario y envía una solicitud a OpenAI para obtener una respuesta del bot. Si la solicitud se procesa correctamente, se envía la respuesta del bot al cliente; de lo contrario, se envía un error al cliente.
-# Finalmente, se inicia el servidor en el puerto 5000 y se muestra un mensaje en la consola para indicar que el servidor se ha iniciado.
+# =============EXPLANATION OF THE SERVER.JS CODE=============
+~ The first line imports the express library, which is used to create the server.
+~ The second line imports all exports from the dotenv library, which is used to load environment variables from a .env file.
+~ The third line imports the cors library, which is used to enable cross-origin request (CORS).
+~ The fourth line imports the Configuration and OpenAIApi classes from the openai library.
+~ Then, the environment variables from the .env file are loaded with dotenv.config().
+~ Next, a Configuration instance is created with the OpenAI API key, which is obtained from an environment variable. Then, an OpenAIApi instance is created with the previous configuration.
+~ Next, an express app is created and configured to use cors and to accept JSON requests.
+~ A route handler is defined for the root route that sends a welcome message.
+~ A route handler is defined for the /chat route that handles POST requests. First, the request body is extracted and a chat request is created using the OpenAIApi instance. Then, the chat request is sent to the OpenAI API and the response is sent back to the client.
+~ Finally, the server is set to listen on the port specified in the PORT environment variable.
